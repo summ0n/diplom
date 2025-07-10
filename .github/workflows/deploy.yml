@@ -32,6 +32,7 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.VPS_SSH_KEY }}
         script: |
+          cd /root/diplom
           docker pull ${{ secrets.DOCKER_USERNAME }}/decap-cms:latest
           docker stop decap-cms || true
           docker rm decap-cms || true
