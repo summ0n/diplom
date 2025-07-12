@@ -1,12 +1,5 @@
-FROM node:18
-# Установка зависимостей
-WORKDIR /root
-COPY package*.json ./
-RUN npm install
-# Копируем исходники
-COPY . .
-# Сборка
-RUN npm run build
-# Запуск сервера (если есть)
-EXPOSE 3000
-CMD ["npm", "start"]
+FROM nginx:alpine
+COPY ./dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
